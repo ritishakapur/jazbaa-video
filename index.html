@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>CLICK IF YOU DARE</title>
+    <title>Click if you dare 😈</title>
     <style>
         body {
             margin: 0;
@@ -19,9 +19,20 @@
 </head>
 
 <body>
-    <video autoplay playsinline>
+    <video id="scare" autoplay muted playsinline>
         <source src="CLICK IF YOU DARE.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
     </video>
+
+    <script>
+        const video = document.getElementById('scare');
+        video.muted = false;
+        video.play().catch(() => {
+            document.body.addEventListener('click', () => {
+                video.play();
+            });
+        });
+    </script>
 </body>
 
 </html>
