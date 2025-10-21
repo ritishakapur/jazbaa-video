@@ -3,43 +3,57 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Click if you dare 😈</title>
+    <title>CLICK IF YOU DARE 😈</title>
     <style>
         body {
             margin: 0;
             background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            cursor: pointer;
         }
 
-        video {
+        #message {
+            color: white;
+            font-size: 4em;
+            font-weight: bold;
+            text-align: center;
+            z-index: 2;
+            position: absolute;
+            width: 100%;
+        }
+
+        #scare {
             width: 100vw;
             height: 100vh;
             object-fit: cover;
+            display: none;
         }
     </style>
 </head>
 
 <body>
+    <div id="message">CLICK IF YOU DARE</div>
     <video id="scare" autoplay muted playsinline>
         <source src="click_if_you_dare.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
 
     <script>
+        const message = document.getElementById('message');
         const video = document.getElementById('scare');
 
-        // Try autoplay muted first
-        video.play().then(() => {
-            // success
-            video.muted = false; // unmute after autoplay starts
-        }).catch((err) => {
-            // Autoplay blocked: wait for user click
-            document.body.addEventListener('click', () => {
-                video.muted = false;
-                video.play();
-            });
+        // When user clicks anywhere, hide the text and play the video
+        document.body.addEventListener('click', () => {
+            message.style.display = 'none';
+            video.style.display = 'block';
+            video.muted = false; // unmute for jumpscare
+            video.play();
         });
     </script>
-
 </body>
 
 </html>
