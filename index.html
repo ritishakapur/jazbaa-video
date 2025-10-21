@@ -26,13 +26,20 @@
 
     <script>
         const video = document.getElementById('scare');
-        video.muted = false;
-        video.play().catch(() => {
+
+        // Try autoplay muted first
+        video.play().then(() => {
+            // success
+            video.muted = false; // unmute after autoplay starts
+        }).catch((err) => {
+            // Autoplay blocked: wait for user click
             document.body.addEventListener('click', () => {
+                video.muted = false;
                 video.play();
             });
         });
     </script>
+
 </body>
 
 </html>
